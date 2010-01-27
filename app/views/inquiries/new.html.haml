@@ -1,0 +1,20 @@
+= render :partial => "pages/show"
+%a{:id => "contact-form"}
+- form_for :inquiry, :url => inquiries_path, :html => { :onsubmit => "form_submitted('Message submitted')"}  do |f|
+  %fieldset
+    = f.error_messages :header_message => "Unable to submit your message"
+    %table{ :cellspacing => 0 }
+      - fields_for :person do |p|
+        %tr
+          %td= p.label :name
+          %td= p.text_field :name
+        %tr.top
+          %td
+            = f.label :inquiry, "Your message"
+            %br
+            %span{:class => "small red"} *required
+          %td
+            = f.text_area :inquiry,  :size => "60x8"
+    - fancy_submit do
+      = f.submit "Submit Suggestion"
+

@@ -1,0 +1,5 @@
+%h1=Suggestions
+-if @inquires
+  -@inquires.each do |i|
+    =i.name
+    =i.message
