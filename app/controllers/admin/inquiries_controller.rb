@@ -17,6 +17,7 @@ class Admin::InquiriesController < AdminController
   def show
     begin
       @inquiry = Inquiry.find(params[:id])
+      @owner = @inquiry
       add_breadcrumb "Suggestions", "admin_inquiries_path" 
     rescue ActiveRecord::RecordNotFound
       flash[:error] = "That suggestion was not found."

@@ -18,7 +18,7 @@ class InquiriesController < ApplicationController
       render :action => "new"
     else
       @inquiry_page = Page.find_by_permalink!('suggestions')
-      @page = Page.find_by_permalink!('suggestion_received') # used in create view
+      @page = Page.find_by_permalink!('suggestion_recevied') # used in create view
       add_breadcrumb @inquiry_page.name, "/#{@inquiry_page.permalink}"
       add_breadcrumb "Thank you for your suggestion."
     end

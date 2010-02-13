@@ -19,23 +19,4 @@
 
 = simple_format(h(@inquiry.inquiry))
 
-%h2
-  %a{:name => "answer_form"}
-  Post a response
-
-#answer_form
-  - form_for @answer, :url => "#{answer_inquiry_path(@inquiry)}\#answer_form", :html => { :onsubmit => "form_submitted('Posting your response...')" } do |f|
-    = f.error_messages :header_message => "Your response could not be posted!", :message => nil
-    Name
-    = f.label :name
-    %br
-    = f.text_field :name
-    %br
-    = f.label :answer
-    %br
-    = f.text_area :answer, :size => "60x10", :style => "width: 550px;"
-    %br
-    = hidden_field_tag  "inquiry_id", @inquiry.id, :id => "inquiry_id"
-    - fancy_submit do
-      = f.submit "Save response"
-
+= render :partial => "shared/comment_form"
