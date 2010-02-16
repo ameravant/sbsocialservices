@@ -37,5 +37,5 @@
             == #{relative_time(inquiry.created_at, 1.day.ago).capitalize}
         %td.center
           = icon "Search", [:admin, inquiry]
-          = trash_icon(inquiry, admin_inquiry_path(inquiry), "#{inquiry.id}") #if current_user.has_role(["Admin", "Editor", "Author"])
+          = trash_icon(inquiry, admin_inquiry_path(inquiry), "#{inquiry.id}") if current_user.has_role(@permissions['comments'])
           
