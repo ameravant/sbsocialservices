@@ -28,7 +28,7 @@
           = will_paginate @inquiries
   %tbody
     - for inquiry in @inquiries
-      %tr{ :class => cycle('odd', 'even'), :id => inquiry.id}
+      %tr{ :class => cycle('odd', 'even'), :id => "inquiry_#{inquiry.id}"}
         %td= link_to h(truncate(inquiry.inquiry, :length => 30)), [:admin, inquiry]
         %td
           = inquiry.name ? inquiry.name : "Not provided"
