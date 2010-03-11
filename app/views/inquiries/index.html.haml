@@ -1,5 +1,7 @@
 %h1 Suggestions
 -if @inquiries
   -@inquiries.each do |i|
-    %br 
-    =link_to("#{i.inquiry}", i)
+    %br
+    %div.suggestion
+      %blockquote 
+        =link_to("#{i.inquiry}", i)
