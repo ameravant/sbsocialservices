@@ -1,6 +1,6 @@
 class InquiriesController < ApplicationController
   unloadable # http://dev.rubyonrails.org/ticket/6001
-  add_breadcrumb "Home", "root_path"
+  #add_breadcrumb "Home", "root_path"
   before_filter :find_page
 
   def new
