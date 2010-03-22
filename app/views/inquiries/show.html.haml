@@ -19,4 +19,4 @@
 
 = simple_format(h(@inquiry.inquiry))
 
-= render :partial => "shared/comment_form"
+= render :partial => "shared/comment_form", :locals => {:owner => @owner}
