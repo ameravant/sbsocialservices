@@ -1,13 +1,13 @@
 class InquiryMailer < ActionMailer::Base
 
   def notification_to_admin(inquiry)
-    setup_email(Setting.first.inquiry_notification_email, CMS_CONFIG['website']['name'], inquiry.email, inquiry.name, "New inquiry received (\##{inquiry.id}) for #{CMS_CONFIG['website']['domain']}")
+    setup_email(Setting.first.inquiry_notification_email, CMS_CONFIG['website']['name'], nil, nil, "New inquiry received (\##{inquiry.id}) for #{CMS_CONFIG['website']['domain']}")
     body :inquiry => inquiry
   end
   
   def confirmation_to_user(inquiry)
-    setup_email(inquiry.email, inquiry.name, Setting.first.inquiry_notification_email, CMS_CONFIG['website']['name'], "#{Setting.first.inquiry_confirmation_subject_line or "Inquiry"}")
-    body :confirmation_message => "#{Setting.first.inquiry_confirmation_message or "Thanks for your Inquiry"}", :inquiry => inquiry
+    #setup_email(nil, nil, Setting.first.inquiry_notification_email, CMS_CONFIG['website']['name'], "#{Setting.first.inquiry_confirmation_subject_line or "Inquiry"}")
+    #body :confirmation_message => "#{Setting.first.inquiry_confirmation_message or "Thanks for your Inquiry"}", :inquiry => inquiry
   end
 
   
