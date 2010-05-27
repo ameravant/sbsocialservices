@@ -1,6 +1,6 @@
 A new inquiry message was submitted.
 <br />
-Name:  <%=@inquiry.name ? h @inquiry.name : "not provided" %><br />
+Name:  <%- if @inquiry.name -%><%=h @inquiry.name %><br /><%- else -%> Not Provided<br /><%- end -%>
 Message:<br />
 
 <%= simple_format @inquiry.inquiry %>
