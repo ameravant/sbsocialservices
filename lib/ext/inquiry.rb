@@ -3,8 +3,5 @@ class Inquiry < ActiveRecord::Base
   default_scope :order => "created_at desc"
   has_many :comments, :as => :commentable, :dependent => :destroy
 
-  def email
-    "no_reply" 
-  end
 
 end
