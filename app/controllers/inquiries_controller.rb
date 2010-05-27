@@ -18,8 +18,6 @@ class InquiriesController < ApplicationController
   end
   
   def create
-    params[:inquiry][:email] = "noreply"
-    params[:inquiry][:name] ||= "not provided"
     @inquiry = Inquiry.new(params[:inquiry])
     if !@inquiry.save
       render :action => "new"
