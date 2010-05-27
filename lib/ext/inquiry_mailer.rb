@@ -13,7 +13,7 @@ class InquiryMailer < ActionMailer::Base
   
   private
   
-  def setup_email(to_email, to_name, from_email = "no_reply", from_name = "not provided", subject)
+  def setup_email(to_email, to_name, from_email="no_reply", from_name="not provided", subject)
     cms_config ||= YAML::load_file("#{RAILS_ROOT}/config/cms.yml")
     recipients   "#{to_name.strip} <#{to_email.strip}>"
     from         "#{CMS_CONFIG['website']['name']} <#{CMS_CONFIG['site_settings']['sendgrid_username']}>"
