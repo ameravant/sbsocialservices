@@ -1,7 +1,7 @@
 class InquiryMailer < ActionMailer::Base
 
   def notification_to_admin(inquiry)
-    setup_email(Setting.first.inquiry_notification_email, CMS_CONFIG['website']['name'], nil, nil, "New inquiry received (\##{inquiry.id}) for #{CMS_CONFIG['website']['domain']}")
+    setup_email(Setting.first.inquiry_notification_email, CMS_CONFIG['website']['name'], "no_reply", "not_provided", "New inquiry received (\##{inquiry.id}) for #{CMS_CONFIG['website']['domain']}")
     body :inquiry => inquiry
   end
   
@@ -13,7 +13,7 @@ class InquiryMailer < ActionMailer::Base
   
   private
   
-  def setup_email(to_email, to_name, from_email="no_reply", from_name="not provided", subject)
+  def setup_email(to_email, to_name, from_email, from_name, subject)
     cms_config ||= YAML::load_file("#{RAILS_ROOT}/config/cms.yml")
     recipients   "#{to_name.strip} <#{to_email.strip}>"
     from         "#{CMS_CONFIG['website']['name']} <#{CMS_CONFIG['site_settings']['sendgrid_username']}>"
