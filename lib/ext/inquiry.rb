@@ -4,7 +4,7 @@ class Inquiry < ActiveRecord::Base
   has_many :comments, :as => :commentable, :dependent => :destroy
 
   def email
-    self.email == "no_reply"
+    self.email = "no_reply"
   end
 
 end
