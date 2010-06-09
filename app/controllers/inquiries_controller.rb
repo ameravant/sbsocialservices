@@ -23,6 +23,7 @@ class InquiriesController < ApplicationController
   end
   
   def show
+    add_breadcrumb "Suggestions Received", suggestions_received_path
     @inquiry = Inquiry.find(params[:id])
     @owner = @inquiry
   end

@@ -6,8 +6,9 @@ class InquiryMailer < ActionMailer::Base
   end
   
   def confirmation_to_user(inquiry)
+
     setup_email(inquiry.email, inquiry.name, Setting.first.inquiry_notification_email, CMS_CONFIG['website']['name'], "#{Setting.first.inquiry_confirmation_subject_line or "Inquiry"}")
-    body :confirmation_message => "#{Setting.first.inquiry_confirmation_message or "Thanks for your Inquiry"}", :inquiry => inquiry
+    body :confirmation_message => "#{Setting.first.inquiry_confirmation_message or "Thanks for your Suggestion"}", :inquiry => inquiry
   end
 
   
