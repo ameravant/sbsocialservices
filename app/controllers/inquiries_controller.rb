@@ -1,7 +1,8 @@
 class InquiriesController < ApplicationController
   unloadable # http://dev.rubyonrails.org/ticket/6001
   #add_breadcrumb "Home", "root_path"
-  before_filter :find_page
+  before_filter :find_page, :except => :index
+  before_filter :find_user, :only => [:new, :create]
 
   def new
     @inquiry = Inquiry.new
@@ -9,7 +10,16 @@ class InquiriesController < ApplicationController
   end
   
   def index
-    @inquiries = Inquiry.all
+    @page = Page.find_by_permalink!('suggestions_received')
+    if params[:q].blank?
+      @all_inquiries = Inquiry.all
+      add_breadcrumb "Suggestions Received"
+    else
+      @all_inquiries = Inquiry.find(:all, :conditions => ["name like ? or email like ? or inquiry like ?", "%#{params[:q]}%", "%#{params[:q]}%", "%#{params[:q]}%"])
+      add_breadcrumb "Suggestions Received", suggestions_received_path
+      add_breadcrumb "Search"
+    end
+    @inquiries = @all_inquiries.paginate(:page => params[:page], :per_page => 25)
   end
   
   def show
@@ -18,15 +28,22 @@ class InquiriesController < ApplicationController
   end
   
   def create
+    params[:person][:email].blank? ? params[:inquiry][:email] = "none_provided" : params[:inquiry][:email] = params[:person][:email]
+    params[:person][:name].blank? ? params[:inquiry][:name] = "none_provided" : params[:inquiry][:name] = params[:person][:name]
     @inquiry = Inquiry.new(params[:inquiry])
     if !@inquiry.save
       render :action => "new"
     else
-      @inquiry_page = Page.find_by_permalink!('suggestions')
-      @page = Page.find_by_permalink!('suggestion_confirm') # used in create view
-      add_breadcrumb @inquiry_page.name, "/#{@inquiry_page.permalink}"
-      add_breadcrumb "Thank you for your suggestion."
+    @inquiry_page = Page.find_by_permalink!('suggestions')
+    @page = Page.find_by_permalink!('suggestions_received') # used in create view
+    add_breadcrumb @inquiry_page.name, "/#{@inquiry_page.permalink}"
+    add_breadcrumb "Thank you for your suggestion."
+    redirect_to('/suggestions_received')
     end
+  end
+
+  def find_user
+    @user = current_user
   end
 
   def find_page

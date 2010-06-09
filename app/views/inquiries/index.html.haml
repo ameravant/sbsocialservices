@@ -1,7 +1,36 @@
-%h1 Suggestions
--if @inquiries
-  -@inquiries.each do |i|
-    %br
-    %div.suggestion
-      %blockquote 
-        =link_to("#{i.inquiry}", i)
+- content_for :meta_title do
+  Suggestions Received
+
+%h1= yield(:meta_title).strip
+
+.box
+  .float-right= render :partial => "/shared/search"
+  - if @inquiries.total_pages > 1
+    %span.gray== Page #{@inquiries.current_page} of #{@inquiries.total_pages}
+  = clear
+
+- unless params[:q].blank?
+  %h2== Found #{pluralize @all_inquiries.size, "suggestion"}
+- else
+  %br
+
+%table.full_width{ :cellspacing => "0" }
+  %thead
+    %tr
+      %th Message
+      %th Name
+      %th Time
+  - if @inquiries.total_pages > 1
+    %tfoot
+      %tr
+        %td{ :colspan => "4" }
+          = will_paginate @inquiries
+  %tbody
+    - for inquiry in @inquiries
+      %tr{ :class => cycle('odd', 'even'), :id => "inquiry_#{inquiry.id}"}
+        %td= link_to h(truncate(inquiry.inquiry, :length => 30)), [:admin, inquiry]
+        %td
+          = inquiry.name ? inquiry.name : "Not provided"
+        %td
+          %span.small.gray
+            == #{relative_time(inquiry.created_at, 1.day.ago).capitalize}          
