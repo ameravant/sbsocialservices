@@ -15,7 +15,4 @@ pretty_body.gsub!('src="/', "src=\"#{$DOMAIN_PATH}")
 <div>
 <div>
   <p>Email: <%= h @inquiry.email %></p>
-  <%- unless @inquiry.phone.blank? -%>
-   <p>Phone: <%= h @inquiry.phone %></p>
-  <%- end -%>
 </div>
