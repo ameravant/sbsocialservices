@@ -12,7 +12,7 @@
         %li= link_to "Testimonials", [:admin, testimonials, :testimonials], :id => "admin-testimonials" if current_user.has_role(@permissions['testimonials'])
       - if @cms_config['modules']['galleries']
         %li= link_to "Galleries", admin_galleries_path, :id => "admin-galleries" if current_user.has_role(@permissions['galleries'])
-      / %li= link_to "Faqs", admin_faqs_path, :id => "admin-faqs"
+      %li= link_to "Faqs", admin_faqs_path, :id => "admin-faqs"
       - if @cms_config['modules']['events']
         %li= link_to @cms_config['site_settings']['events_title'], admin_events_path, :id => "admin-events" if current_user.has_role(@permissions['events'])
       - if @cms_config['modules']['documents']
