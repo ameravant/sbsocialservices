@@ -12,6 +12,7 @@
         %li= link_to "Testimonials", [:admin, testimonials, :testimonials], :id => "admin-testimonials" if current_user.has_role(@permissions['testimonials'])
       - if @cms_config['modules']['galleries']
         %li= link_to "Galleries", admin_galleries_path, :id => "admin-galleries" if current_user.has_role(@permissions['galleries'])
+      %li= link_to "Faqs", admin_faqs_path, :id => "admin-faqs"
       - if @cms_config['modules']['events']
         %li= link_to @cms_config['site_settings']['events_title'], admin_events_path, :id => "admin-events" if current_user.has_role(@permissions['events'])
       - if @cms_config['modules']['documents']
@@ -36,6 +37,7 @@
 
 %style{:type => "text/css"}
   ==#admin-home {background-image: url('#{css_icon("Home")}')}
+  ==#admin-faqs {background-image: url('#{css_icon("Question")}')}
   ==#admin-pages {background-image: url('#{css_icon("Clipboard Copy")}')}
   ==#admin-blogs {background-image: url('#{css_icon("Write")}')}
   ==#admin-galleries {background-image: url('#{css_icon("Picture")}')}
