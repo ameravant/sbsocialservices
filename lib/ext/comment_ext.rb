@@ -6,7 +6,7 @@ module CommentExt
   
   module ClassMethods
     def comment_extra_methods
-      belongs_to :commentable, :polymorphic => true
+      belongs_to :commentable, :polymorphic => true, :counter_cache => true
       profanity_filter :comment
       include CommentExt::InstanceMethods
     end
