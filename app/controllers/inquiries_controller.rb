@@ -49,6 +49,7 @@ class InquiriesController < ApplicationController
 
   def find_page
     @page = Page.find_by_permalink!('suggestions')
+    @menu = @page.menus.first
     # @article_categories = ArticleCategory.active
     # @article_archive = Article.published.group_by { |a| [a.published_at.month, a.published_at.year] }
     # @article_authors = Person.active.find(:all, :conditions => "articles_count > 0")
