@@ -32,6 +32,7 @@ class InquiriesController < ApplicationController
     params[:person][:email].blank? ? params[:inquiry][:email] = "none_provided" : params[:inquiry][:email] = params[:person][:email]
     params[:person][:name].blank? ? params[:inquiry][:name] = "none_provided" : params[:inquiry][:name] = params[:person][:name]
     @inquiry = Inquiry.new(params[:inquiry])
+    @inquiry.person_id = @user.person_id
     if !@inquiry.save
       render :action => "new"
     else
